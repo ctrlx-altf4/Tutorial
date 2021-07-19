@@ -3,7 +3,8 @@ title: useState-basics
 template: post
 slug: useState-basic
 draft: true
-date: "2020-09-05"
+dateStarted: "2021-07-18",
+lastEditedOn: ""
 description:
 cover: ./.jpeg
 category: react
@@ -52,7 +53,6 @@ const [state, setState] = useState();
 You might have been using this without understanding why it is done like that. So, Lets break the above expression. The `useState` is just a fancy way of writing a hook that returns an array. **Remember it's compulsory to add prefix "use" in function of react if you are building a custom hook**
 
 `useState` is just a function that returns an array. The first element of the array is the state while the second element of the array is a function that sets the state.
-
 so simply, what we could have done was:
 
 ```javascript
@@ -69,6 +69,8 @@ const [state,setState] = useState()
 ```
 
 Phew!! I hope you got that.
+
+> Why do we need a function to set a value of a state?? Know more about this _here_
 
 ## Initialization
 
@@ -99,7 +101,7 @@ const App = () => {
 };
 ```
 
-> The code above simply displays a button which when clicks changes the `state` and also changes the count variable.
+> The code above simply displays a button which when clicked changes the `state` and also changes the count variable.
 
 Since state simply stores some data, it may seem irrelevant to make use of `useState` to get a `state` variable to store the data and a function to set that state. I mean, we could simply use a js variable to store a data:
 
