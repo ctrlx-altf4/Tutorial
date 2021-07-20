@@ -4,6 +4,7 @@ template: post
 slug: rendering-lists
 draft: true
 dateStarted: "2021-07-19"
+lastEditedOn: "2021-07-20"
 description:
 cover: ./.jpeg
 category: react
@@ -15,16 +16,16 @@ tags:
   - array
 ---
 
-## `map` vs `forEach` method of react;
+## `map` vs `forEach` method of javascript
 
-Do you know the difference between `map` and `forEach` method of javascript?
+Do you know the difference between `map` and `forEach` method of array?
 
 ```javascript
-const arrayOfVariants = [1, 2, 3, 4, 5];
+const array = [1, 2, 3, 4, 5];
 
-const x = arrayOfVariants.map((each) => each * 2);
+const x = array.map((each) => each * 2);
 
-const y = arrayOfVariants.forEach((each) => each * 2);
+const y = array.forEach((each) => each * 2);
 
 console.log("map method", x); // [2,4,6,8,10]
 console.log("forEach method", y); // undefined
@@ -60,7 +61,7 @@ We can use javacript expression by wrapping it in curly `"{}"` braces in _JSX_.S
 
 For now we'll not be going into what datatypes cannot be rendered by react, to know more about these _read here_. `Mind you, Objects cannot be rendered by react`.
 
-What I want you to focus in this part, is that along with strings and numbers we can also render an array within in JSX. So why is that important? Lets combine our knowledge about the previous section on output of `map` method with the array being rendered by react.
+What I want you to focus in this part, is that along with strings and numbers we can also render an array within in JSX. So why is that important? Lets combine our knowledge about the previous section on output of `map` method and the capability of react ro render an array on the screen.
 
 ```jsx
 import React from "react";
@@ -85,7 +86,7 @@ const App = () => {
 export default App;
 ```
 
-If you run the above code, you should see the mappedArray being rendered on the screen using both the `variable` mappedArray and the expression `array.map((eeach=>each*2))`. Since as mentioned in the first section the ouput of `map` method is an array and as mentioned in the second second array is a valid react child.
+If you run the above code, you should see the mappedArray being rendered on the screen using both the `variable` mappedArray and the expression `array.map((eeach=>each*2))`. Since as mentioned in the first section the ouput of `map` method is an array and as mentioned in the second section array is a valid react child.
 
 ## `key` in array rendering.
 
@@ -114,12 +115,12 @@ const App = () => {
 export default App;
 ```
 
-This might seem a bit weird for you. Here we have used a map method on `names` array and returned `jsx element` i.e. `<p>{each}</p>`. It should be clear by now that the output of the `map` expression is an array of jsx element.
+This might seem a bit weird for you. Let me explain, Here we have used a map method on `names` array and returned `jsx element` i.e. `<p>{each}</p>`. It should be clear by now that the output of the `map` expression is an array of jsx element.
 
 ```jsx
-{
-  names.map((each) => <p>{each}</p>);
-}
+<div>
+  {names.map((each) => <p>{each}</p>)}
+</div>
 
 // output of above expression
 <div>
@@ -132,9 +133,106 @@ This might seem a bit weird for you. Here we have used a map method on `names` a
 
 Now you should be seeing names being displayed on the browser. If you inspect the element (`how?`) you should be able to see each name being wrapped by `p` tag like the output mentioned above.
 
-But in the `console tab` a warning message like the one below appears. Do you know why's that??
+The browser displays the result the way we want it to, but react seems to complain. In the `console tab` a warning message like the one below appears.
 
-Warning: Each child in a list should have a unique "key" prop.
+> Warning: Each child in a list should have a unique "key" prop.
+
+For now, if you are just a beginner, I want you to understand that when you are mapping an array to display some jsx , just add a unique "key" _prop_ to the wrapper element. `Why?` learn about this _here_.
+
+So what do I mean by "unique key prop to the wrapper element" ?
+
+```jsx
+const names = [
+  "Jordan Walke",
+  "Dan Abramov",
+  "Kent C. Dodds",
+  "Tanner Linsley",
+];
+
+return (
+  <div>
+    {names.map((each) => (
+      <p key={each}>{each}</p>
+    ))}
+  </div>
+);
+```
+
+In the above code I've added a `key` in `p` tag and assigned it's value to `each`. The given mapping expression returns a jsx element which is wrapped by a `p` tag, so `p` is our wrapper element. Now if we look at the names array, we can see that each and every names are different and hence unique. _The first parameter of the callback function of map method is each element of the array on each iteration_. That means the value of "each" is unique on each iteration.
+
+So, I've assigned a unique value (`each`) to "key" prop to the wrapper element `p`.
+
+Remember the key must be **unique**. Here I am certain that the `names` array contains unique names only so that why I assigned this value to the key prop. If by any chance, there were to be any duplicate values on the `names` array. I should find a better alternative.
+
+We will learn about alternatives while learning to render objects.
+
+# Just for fun
+
+For now, Lets see a simple usage much bettter than displaying names.
+
+```jsx
+import React from "react";
+import "./App.css";
+
+const App = () => {
+  const classNames = ["primary", "secondary", "warning", "danger"];
+
+  return (
+    <div>
+      {classNames.map((each) => (
+        <button key={each} className={each}>
+          {each}
+        </button>
+      ))}
+    </div>
+  );
+};
+
+export default App;
+```
+
+Run the code above and add some css property to `App.css` file for classNames `primary`, `secondary`, `warning`, `danger`. Maybe something like this..
+
+```css
+.primary {
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  font-size: 1.2rem;
+  background: purple;
+  color: white;
+  border: none;
+}
+.secondary {
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  font-size: 1.2rem;
+  background: grey;
+  color: white;
+  border: none;
+}
+.warning {
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  font-size: 1.2rem;
+  background: #ffcc00;
+  color: white;
+  border: none;
+}
+.danger {
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  font-size: 1.2rem;
+  background: #cc3300;
+  color: white;
+  border: none;
+}
+```
+
+> We're repeating a lots of css here. We will be learning on optimizing them soon. For now, play with list rendering, customize css and keep learning
 
 -- To be continued
 
