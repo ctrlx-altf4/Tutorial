@@ -49,3 +49,4 @@ notes:
 4. z Index on overlap
 5. float and why it sometimes make no sense
 6. sticky and why it fails on scrolling (in some cases??)
+7. affects on width property
