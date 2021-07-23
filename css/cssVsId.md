@@ -1,5 +1,5 @@
 ---
-title: class Vs idd
+title: class Vs id
 template: post
 slug: class-vs-id
 draft: true
@@ -18,7 +18,7 @@ tags:
 
 # class vs id in css
 
-If you are using class and id only for styling then there is no any difference between class and id. If you have been googling for a while on the difference,you might have read ids are unique in a page while classes are can be used multiple times. I agree on your findings, id are supposed to be unique in a page while classes can be used multiple times in several elements. But neither html nor css nor javascript validate the uniqueness of id, so that must be confusing.
+If you are using class and id only for styling then there is no any difference between class and id. If you have been googling for a while on the difference,you might have read ids are unique in a page while classes can be used multiple times. I agree on your findings, id are supposed to be unique in a page while classes can be used multiple times in several elements. But neither html nor css nor javascript validate the uniqueness of id, so that must be confusing.
 
 Run all the follwing HTML, CSS and JS in [codepen](https://codepen.io/pen/)
 
@@ -46,7 +46,7 @@ CSS
 
 ### Difference 1
 
-> Only difference while applying styles is how they are represented in `css`. Syntax for class selector is `.class` while for id selector `#id`. We use (.) followed by the class name to apply styles to class while (#) followed by id.
+> Only difference while applying styles is how they are represented in `css`. Syntax for class selector is `.class` while for id selector `#id`. We use (.) followed by the class name to apply styles to class while (#) followed by id name to apply css to id.
 
 Now lets get into javascript for a while
 
@@ -58,11 +58,11 @@ console.log("id", id);
 console.log("class", className);
 ```
 
-Observe carefully for id we have getElementById without `s` while for class we have getElementsByClassName with `s` clearly indicating we can get multiple with with a classname but only one element with an id.
+Observe carefully for id we have getElementById without `s` while for class we have getElement`s`ByClassName with `s` clearly indicating we can get multiple element with a classname but only one element with an id in javascript.
 
 ### Difference 2
 
-> The output of id will the first div with the id "blue" all other divs with "blue" are ignored. While the output of class will be all the div with the class "red". Here the concept of uniqueness is important. Since we can clearly see that only one div with the id blue is found by javascript and all other div with id blue are ignored.
+> We can only select the first div with the id "blue" all other divs with "blue" are ignored using javascript. While all the div with the class "red" will be selected. Here the concept of uniqueness is important. Since we can clearly see that only one div with the id blue is found by javascript and all other div with id blue are ignored.
 
 Consider the follwing HTML & CSS
 
@@ -85,9 +85,11 @@ CSS
 }
 ```
 
+The background of the div will be blue.
+
 ### Difference 3
 
-> The background of the div will be blue. When both id and class are used for same css property on the same element then the property of id will be given priority
+> When both id and class are used for same css property on the same element then the property of id will be given priority
 
 Consider the following HTML & CSS
 
@@ -126,7 +128,7 @@ CSS
 }
 ```
 
-The HTML and CSS above will display red , blue and green block each of height 600px. Say you are running your HTMl and css on url: `localhost:8000`. Now if you add `#footer` on the url, the browser will scroll down to the div with footer id.
+The HTML and CSS above will display red , blue and green block each of height 600px. lets say that you are running your HTMl and css on url: `localhost:8000`. Now if you add `#footer` on the url, the browser will scroll down to the div with id="footer".
 
 If you access this url:
 `localhost:8000#footer` then the browser will scroll down the footer div whose background color is green.
